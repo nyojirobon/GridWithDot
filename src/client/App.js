@@ -1,8 +1,10 @@
 import React from 'react'
+import GridFrame from './components/GridFrame'
 
 export default function App() {
   return (
-    /* TODO: Change here to Grid component */
-    <div>Grid must be here</div>
+    <div className="app">
+      <GridFrame rowNum={4} columnNum={4} />
+    </div>
   )
 }
