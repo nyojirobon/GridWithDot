@@ -21,10 +21,11 @@ export default function GridCell({ displayDot }) {
   const classes = useStyles()
 
   return (
-    <div className={classes.cell}>
+    <div className={classes.cell} data-test="cell">
       <div
         className={classes.dot}
-        style={displayDot ? { display: 'block' } : { display: 'none' }}
+        style={{ display: displayDot ? 'block' : 'none' }}
+        data-test="dot"
       />
     </div>
   )

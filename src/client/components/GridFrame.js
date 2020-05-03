@@ -2,6 +2,7 @@ import React, { useReducer, useCallback, useEffect } from 'react'
 import GridList from '@material-ui/core/GridList'
 import GridListTile from '@material-ui/core/GridListTile'
 import { makeStyles } from '@material-ui/core/styles'
+import GridReducer from '../reducers/GridReducer'
 import GridCell from './GridCell'
 
 const useStyles = makeStyles({
@@ -15,36 +16,7 @@ const useStyles = makeStyles({
 
 export default function GridFrame({ rowNum, columnNum }) {
   const classes = useStyles()
-
-  const [currentCell, dispatch] = useReducer(
-    (state, action) => {
-      switch (action.type) {
-        // move left
-        case 'decColumn': {
-          const newColumn =
-            state.column - 1 < 0 ? state.column : state.column - 1
-          return { ...state, column: newColumn }
-        }
-        // move up
-        case 'decRow': {
-          const newRow = state.row - 1 < 0 ? state.row : state.row - 1
-          return { ...state, row: newRow }
-        }
-        // move right
-        case 'incColumn': {
-          const newColumn =
-            state.column + 1 >= columnNum ? state.column : state.column + 1
-          return { ...state, column: newColumn }
-        }
-        // move down
-        case 'incRow': {
-          const newRow = state.row + 1 >= rowNum ? state.row : state.row + 1
-          return { ...state, row: newRow }
-        }
-      }
-    },
-    { row: 0, column: 0 }
-  )
+  const [currentCell, dispatch] = useReducer(GridReducer, { row: 0, column: 0 })
 
   const handleKeyPress = useCallback((event) => {
     switch (event.keyCode) {
@@ -58,11 +30,11 @@ export default function GridFrame({ rowNum, columnNum }) {
         break
       // right arrow key
       case 39:
-        dispatch({ type: 'incColumn' })
+        dispatch({ type: 'incColumn', maxColumn: columnNum })
         break
       // down arrow key
       case 40:
-        dispatch({ type: 'incRow' })
+        dispatch({ type: 'incRow', maxRow: rowNum })
         break
     }
   }, [])
@@ -91,6 +63,7 @@ export default function GridFrame({ rowNum, columnNum }) {
       cols={columnNum}
       cellHeight={150}
       spacing={0}
+      data-test="frame"
     >
       {cells}
     </GridList>
