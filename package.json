@@ -41,6 +41,7 @@
     "husky": "^4.2.5",
     "jest": "^25.5.1",
     "lint-staged": "^10.2.0",
+    "nodemon": "^2.0.3",
     "prettier": "^2.0.5",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
