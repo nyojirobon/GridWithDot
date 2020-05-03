@@ -1,4 +1,5 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const path = require('path')
 
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
@@ -24,6 +25,9 @@ module.exports = {
         loader: ['style-loader', 'css-loader']
       }
     ]
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()]
   },
   devtool: 'inline-source-map',
   plugins: [htmlWebpackPlugin]
