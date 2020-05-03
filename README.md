@@ -19,6 +19,8 @@ You need git and Node.js to run this application.
 4. npm run start
 ```
 
+Then, open localhost:3000 in browser.
+
 ## Commands
 
 ### Production
